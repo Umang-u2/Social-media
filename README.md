@@ -6,7 +6,7 @@ Node.Js
 Express.JS  
 MongoDB  
 
-#NPM Packages used:
+#NPM Packages used:  
 bcrypt: To generate hashed passwords  
 express: framework for node for routing web pages  
 mongoose: To connect to MongoDB  
