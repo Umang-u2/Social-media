@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 
 //Register user
 router.post("/register", async (req,res) => {
@@ -15,6 +16,10 @@ router.post("/register", async (req,res) => {
             username: req.body.username,
             email: req.body.email,
             password: hashedPassword,
+            /* profilePic: {
+              data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+              contentType: 'image/*'
+            } */
         })
 
         const email = await User.findOne({ email: req.body.email });

@@ -20,8 +20,10 @@ const UserSchema = new mongoose.Schema({
         min: 6
     },
     profilePic: {
-        type: String,
-        default: ""
+        type: {
+            data: Buffer,
+            contentType: String,
+          }
     }
 });
 
