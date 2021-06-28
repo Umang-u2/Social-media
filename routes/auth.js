@@ -25,7 +25,7 @@ router.post("/register", async (req,res) => {
         const email = await User.findOne({ email: req.body.email });
         const user = await User.findOne({ username: req.body.username });
 
-        //Saving user and generating response
+        //Saving user and generating response along with the user token
         if(!user && !email){
         const user = await newUser.save();
         const userToken = jwt.sign({ id: User._id, name: user.username, email: user.email }, process.env.VERY_SECRET_KEY, {
@@ -35,8 +35,10 @@ router.post("/register", async (req,res) => {
           userToken,
           user
         });
+        //When username is already present in the database
         }else if(user!=null){
           res.status(500).json("Username already present! Please register with a new Username or Login with the existing username");
+        //When Email ID already present in the Database
         }else {
           res.status(500).json("EmailID already resgistered! Please register with a new EmailID or Login with the existing account");
         }
@@ -49,12 +51,15 @@ router.post("/register", async (req,res) => {
 //LOGIN
 router.post("/login", async (req, res) => {
     try {
+      //Finding the user in the database
       const user = await User.findOne({ email: req.body.email });
       !user && res.status(404).json("User not found, Please check your Email-ID");
-  
+
+      //Validating the password using bcrypt
       const validPassword = await bcrypt.compare(req.body.password, user.password)
       !validPassword && res.status(400).json("wrong password")
 
+      //Creating the access token for the user session
       const token = jwt.sign({ id: user._id, name: user.name, email: user.email }, process.env.VERY_SECRET_KEY, {
         expiresIn: parseInt(process.env.TOKEN_EXPIRATION, 10)
       })

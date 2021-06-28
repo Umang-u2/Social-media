@@ -21,6 +21,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req,res) => {
     try{
     const post = await Post.findById(req.params.id);
+    //To check if the user is not updating other users post.
     if(post.userId === req.body.userId){
         await post.updateOne({$set:req.body});
         res.status(200).json("Your Post was updated successfully!");
@@ -36,6 +37,7 @@ router.put("/:id", async (req,res) => {
 router.delete("/:id", async (req,res) => {
     try{
     const post = await Post.findById(req.params.id);
+    //To check if the user is not deleting other users post.
     if(post.userId === req.body.userId){
         await post.deleteOne({$set:req.body});
         res.status(200).json("Congratulations! Your post was deleted.. ");
@@ -47,7 +49,7 @@ router.delete("/:id", async (req,res) => {
 }
 })
 
-//get a post
+//get a post using Post ID
 router.get("/:id", async (req,res) => {
     try{
         const post = await Post.findById(req.params.id);

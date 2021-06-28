@@ -1,5 +1,6 @@
 const multer = require('multer');
 
+//To upload the image file from a buffer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'photo')

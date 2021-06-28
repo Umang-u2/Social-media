@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//Creating Post schema in mongoDB
 const PostSchema = new mongoose.Schema({
     userId: {
         type: String,
