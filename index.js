@@ -7,8 +7,7 @@ const helmet = require("helmet");
 const bcrypt = require("bcrypt");
 const morgan = require("morgan");
 
-//Requiring the different routes created
-const userRoute = require("./routes/users");
+//Importing the different routes created
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 
@@ -24,7 +23,6 @@ mongoose.connect(process.env.mongo_url, {useNewUrlParser: true, useUnifiedTopolo
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
-app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts",postRoute);
 
