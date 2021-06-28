@@ -20,5 +20,5 @@ fs: file system management to provide path for the uploaded image
 
 #Future Enhancements  
 The functionality to friend or unfriend another user.  
-The functionality to like a post and check the number of like for a given post.  
+The functionality to like a post and check the number of likes for a given post.  
 Sentiment Analysis to process the recent posts of a particular user and provide daily quotes based on the mood of the user on a particular day/week.  
